@@ -2,17 +2,22 @@
 
 using namespace std;
 
+//global variables
+string storeName;
+double storePrice;
+
 double MakePurchase();//output the total and ask for confirmation to complete the order
 void ListStores();//lists the store to choose from
-int ChooseStore();//choose from a list of stores to go to
+void ChooseStore(int i);//choose from a list of stores to go to
 void LeaveStore();//allows the user to leave the current store
 void ListItems();//lists the items in the aisle
 void AddPrices(double cartPrices[]);//adds specified prices of items to the user's cart
 void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
+void displayCart(string cart[]);
 
 // JLS: added this to make sure adding items worked but can leave it in to allow users to see cart before checkout
 void displayCart() {
-    cout << endl << "Your cart contains:" << endl;
+    /*cout << endl << "Your cart contains:" << endl;
     if (cart.empty()) {
         cout << "Cart is empty." << endl;
     }
@@ -21,19 +26,19 @@ void displayCart() {
             cout << pair.first << ": " << pair.second << endl;
         }
     }
-    cout << endl;
+    cout << endl;*/
 }
 
 // JLS: gave additems funcallity to test isles you can change it if needed tho its basic just to make sure items are added
 // it dosent have prices yet but will implement them later
 void additems(const string& item, int quantity) {
-    if (quantity > 0) {
+    /*if (quantity > 0) {
         cart[item] += quantity;
         cout << "Item added to cart." << endl;
     }
     else {
         cout << "Item was not added to cart." << endl;
-    }
+    }*/
 }
 
 //JLS: isles for Meijer all labeled with M
@@ -280,8 +285,8 @@ void MelectronicsAisle() {
 }
 
 //JLS: mejier store to select the aisles ill add the other stores based off of this as the base
-void mejier() {
-    cout << "Welcome to the Supermarket!" << endl;
+void Store() {
+    cout << "Welcome to " << storeName << "!" << endl;
 
     while (true) {
         cout << "Please select an aisle:" << endl;
@@ -313,25 +318,45 @@ void mejier() {
             cout << "Invalid choice. Please select a valid aisle or option." << endl;
         }
     }
-
-    return 0;
 }
 
 int main() {
     //variables
     int i;//this integer will represent which store the user is in
 
+    //user's cart
+    string cart[100];
+
     ListStores();
+    
+    //get input from user to choose store
+    cin >> i;
+    //select store that the user has entered
+    ChooseStore(i);
+
+    Store();
 
 }
 void ListStores() {
     cout << "Available stores to choose from: " << endl;
-    cout << "Meijer" << endl;
-    cout << "Wallmart" << endl;
-    cout << "Target" << endl;
+    cout << "Meijer (press 1)" << endl;
+    cout << "Wallmart (press 2)" << endl;
+    cout << "Target (press 3)" << endl;
     cout << "Type any Store to enter: ";
 }
 // this 
-int ChooseStore() {
-
+void ChooseStore(int i) {
+    switch (i) {
+    case 1:
+        storeName = "Meijer";
+        storePrice = .9;
+        break;
+    case 2:
+        storeName = "Wallmart";
+        storePrice = 1;
+        break;
+    case 3:
+        storeName = "Target";
+        storePrice = 1.1;
+    }
 }
