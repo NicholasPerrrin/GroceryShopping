@@ -6,6 +6,11 @@ using namespace std;
 string storeName;
 int index = 0;
 
+struct shopper {
+    string firstName;
+    string LastName;
+};
+
 double MakePurchase();//output the total and ask for confirmation to complete the order
 void ListStores();//lists the store to choose from
 string ChooseStore(int i);//choose from a list of stores to go to
@@ -45,7 +50,7 @@ void additems(string item, int quantity, string cart[]) {
     }
 }
 
-//JLS: isles for Meijer all labeled with M
+//JLS: aisles for Meijer all labeled with M
 void MgroceryAisle() {
     cout << "You are in the Grocery aisle." << endl;
 
