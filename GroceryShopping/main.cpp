@@ -4,12 +4,11 @@ using namespace std;
 
 //global variables
 string storeName;
-double storePrice;
 int index = 0;
 
 double MakePurchase();//output the total and ask for confirmation to complete the order
 void ListStores();//lists the store to choose from
-void ChooseStore(int i);//choose from a list of stores to go to
+string ChooseStore(int i);//choose from a list of stores to go to
 void LeaveStore();//allows the user to leave the current store
 void ListItems();//lists the items in the aisle
 void addItems(string item, int quantity, string cart[]);
@@ -290,7 +289,7 @@ void MelectronicsAisle() {
 }
 
 //JLS: mejier store to select the aisles ill add the other stores based off of this as the base
-void Store() {
+void Store(string storeName) {
     cout << "Welcome to " << storeName << "!" << endl;
 
     while (true) {
@@ -337,9 +336,9 @@ int main() {
     //get input from user to choose store
     cin >> i;
     //select store that the user has entered
-    ChooseStore(i);
+    string storeName = ChooseStore(i);
 
-    Store();
+    Store(storeName);
 
 }
 void ListStores() {
@@ -349,19 +348,17 @@ void ListStores() {
     cout << "Target (press 3)" << endl;
     cout << "Type any Store to enter: ";
 }
-// this 
-void ChooseStore(int i) {
+
+string ChooseStore(int i) {
     switch (i) {
     case 1:
         storeName = "Meijer";
-        storePrice = .9;
         break;
     case 2:
         storeName = "Wallmart";
-        storePrice = 1;
         break;
     case 3:
         storeName = "Target";
-        storePrice = 1.1;
     }
+    return storeName;
 }
