@@ -5,20 +5,24 @@ using namespace std;
 //global variables
 string storeName;
 int index = 0;
+const int CART_SIZE = 100;
 
 struct shopper {
     string firstName;
     string LastName;
+    string cart[CART_SIZE];
 };
 
 double MakePurchase();//output the total and ask for confirmation to complete the order
-void ListStores();//lists the store to choose from
+void ListStores(shopper customer);//lists the store to choose from
 string ChooseStore(int i);//choose from a list of stores to go to
 void LeaveStore();//allows the user to leave the current store
 void ListItems();//lists the items in the aisle
 void addItems(string item, int quantity, string cart[]);
 void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
 void displayCart(string cart[]);
+void Store(string storeName);
+shopper Customer(shopper customer);
 
 // JLS: added this to make sure adding items worked but can leave it in to allow users to see cart before checkout
 void displayCart(string cart[]) {
@@ -45,7 +49,7 @@ void displayCart(string cart[]) {
 // JLS: gave additems funcallity to test isles you can change it if needed tho its basic just to make sure items are added
 // it dosent have prices yet but will implement them later
 void additems(string item, int quantity, string cart[]) {
-    for (int i = 0; i < quantity; i++) {
+    for (index; index < quantity; index++) {
         cart[index] = item;
     }
 }
@@ -333,10 +337,13 @@ int main() {
     //variables
     int i;//this integer will represent which store the user is in
 
-    //user's cart
-    string cart[100];
+    //shopper structure
+    shopper customer;
 
-    ListStores();
+    //initialize customer
+    customer = Customer(customer);
+
+    ListStores(customer);
     
     //get input from user to choose store
     cin >> i;
@@ -346,7 +353,8 @@ int main() {
     Store(storeName);
 
 }
-void ListStores() {
+void ListStores(shopper customer) {
+    cout << "Hello, " << customer.firstName << " " << customer.LastName << endl;
     cout << "Available stores to choose from: " << endl;
     cout << "Meijer (press 1)" << endl;
     cout << "Wallmart (press 2)" << endl;
@@ -366,4 +374,11 @@ string ChooseStore(int i) {
         storeName = "Target";
     }
     return storeName;
+}
+
+shopper Customer(shopper customer) {
+    cout << "Please enter your name: ";
+    cin >> customer.firstName >> customer.LastName;
+
+    return customer;
 }
