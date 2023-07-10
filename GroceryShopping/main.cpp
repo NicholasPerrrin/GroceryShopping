@@ -18,20 +18,20 @@ void ListStores(shopper customer);//lists the store to choose from
 string ChooseStore(int i);//choose from a list of stores to go to
 void LeaveStore();//allows the user to leave the current store
 void ListItems();//lists the items in the aisle
-void addItems(string item, int quantity, string cart[]);
+void addItems(string item, int quantity, shopper customer);
 void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
-void displayCart(string cart[]);
-void Store(string storeName);
+void displayCart(shopper& customer);
+void Store(string storeName, shopper customer);
 shopper Customer(shopper customer);
 
 // JLS: added this to make sure adding items worked but can leave it in to allow users to see cart before checkout
-void displayCart(string cart[]) {
-    if (cart[0] == "") {
+void displayCart(shopper& customer) {
+    if (customer.cart[0] == "") {
         cout << "Cart is empty" << endl;
     }
     else {
-        for (int i = 0; i < 100; i++) {
-            cout << cart[i];
+        for (int i = 0; i < CART_SIZE; i++) {
+            cout << customer.cart[i];
         }
     }
     /*cout << endl << "Your cart contains:" << endl;
@@ -48,14 +48,15 @@ void displayCart(string cart[]) {
 
 // JLS: gave additems funcallity to test isles you can change it if needed tho its basic just to make sure items are added
 // it dosent have prices yet but will implement them later
-void additems(string item, int quantity, string cart[]) {
-    for (index; index < quantity; index++) {
-        cart[index] = item;
+void additems(string item, int quantity, shopper& customer) {
+    for (int i = 0; i < quantity; i++) {
+        customer.cart[index] = item;
+        index++;
     }
 }
 
 //JLS: aisles for Meijer all labeled with M
-void MgroceryAisle() {
+void MgroceryAisle(shopper customer) {
     cout << "You are in the Grocery aisle." << endl;
 
     while (true) {
@@ -74,28 +75,28 @@ void MgroceryAisle() {
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Milk", quantity);
+            additems("Milk", quantity, customer);
         }
         else if (item_choice == "2" || item_choice == "eggs") {
             cout << "You have chosen: Eggs" << endl;
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Eggs", quantity);
+            additems("Eggs", quantity, customer);
         }
         else if (item_choice == "3" || item_choice == "chicken") {
             cout << "You have chosen: Chicken" << endl;
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Chicken", quantity);
+            additems("Chicken", quantity, customer);
         }
         else if (item_choice == "4" || item_choice == "cereal") {
             cout << "You have chosen: Cereal" << endl;
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Cereal", quantity);
+            additems("Cereal", quantity, customer);
         }
         else if (item_choice == "list") {
             continue;
@@ -105,7 +106,7 @@ void MgroceryAisle() {
             break;
         }
         else if (item_choice == "cart") {
-            //displayCart();
+            displayCart(customer);
         }
         else {
             cout << "Invalid choice. Please select a valid item or option." << endl;
@@ -115,7 +116,7 @@ void MgroceryAisle() {
 }
 
 //JLS: clothing aisle has a nested loop to select women or men clothing to meet project requirments
-void MclothingAisle() {
+void MclothingAisle(shopper customer) {
     cout << "You are in the Clothing aisle." << endl;
 
     while (true) {
@@ -146,21 +147,21 @@ void MclothingAisle() {
                     cout << "Enter the quantity you want: ";
                     int quantity;
                     cin >> quantity;
-                    //additems("Men's T-Shirt", quantity);
+                    additems("Men's T-Shirt", quantity, customer);
                 }
                 else if (item_choice == "2" || item_choice == "jeans") {
                     cout << "You have chosen: Men's Jeans" << endl;
                     cout << "Enter the quantity you want: ";
                     int quantity;
                     cin >> quantity;
-                    //additems("Men's Jeans", quantity);
+                    additems("Men's Jeans", quantity, customer);
                 }
                 else if (item_choice == "3" || item_choice == "jacket") {
                     cout << "You have chosen: Men's Jacket" << endl;
                     cout << "Enter the quantity you want: ";
                     int quantity;
                     cin >> quantity;
-                    //additems("Men's Jacket", quantity);
+                    additems("Men's Jacket", quantity, customer);
                 }
                 else if (item_choice == "list") {
                     continue;
@@ -170,7 +171,7 @@ void MclothingAisle() {
                     break;
                 }
                 else if (item_choice == "cart") {
-                    //displayCart();
+                    displayCart(customer);
                 }
                 else {
                     cout << "Invalid choice. Please select a valid item or option." << endl;
@@ -197,21 +198,21 @@ void MclothingAisle() {
                     cout << "Enter the quantity you want: ";
                     int quantity;
                     cin >> quantity;
-                    //additems("Women's T-Shirt", quantity);
+                    additems("Women's T-Shirt", quantity, customer);
                 }
                 else if (item_choice == "2" || item_choice == "jeans") {
                     cout << "You have chosen: Women's Jeans" << endl;
                     cout << "Enter the quantity you want: ";
                     int quantity;
                     cin >> quantity;
-                    //additems("Women's Jeans", quantity);
+                    additems("Women's Jeans", quantity, customer);
                 }
                 else if (item_choice == "3" || item_choice == "jacket") {
                     cout << "You have chosen: Women's Jacket" << endl;
                     cout << "Enter the quantity you want: ";
                     int quantity;
                     cin >> quantity;
-                    //additems("Women's Jacket", quantity);
+                    additems("Women's Jacket", quantity, customer);
                 }
                 else if (item_choice == "list") {
                     continue;
@@ -221,7 +222,7 @@ void MclothingAisle() {
                     break;
                 }
                 else if (item_choice == "cart") {
-                    //displayCart();
+                    displayCart(customer);
                 }
                 else {
                     cout << "Invalid choice. Please select a valid item or option." << endl;
@@ -246,7 +247,7 @@ void MclothingAisle() {
     cout << endl;
 }
 
-void MelectronicsAisle() {
+void MelectronicsAisle(shopper customer) {
     cout << "You are in the Electronics aisle." << endl;
 
     while (true) {
@@ -264,21 +265,21 @@ void MelectronicsAisle() {
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Laptop", quantity);
+            additems("Laptop", quantity, customer);
         }
         else if (item_choice == "2" || item_choice == "smartphone") {
             cout << "You have chosen: Smartphone" << endl;
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Smartphone", quantity);
+            additems("Smartphone", quantity, customer);
         }
         else if (item_choice == "3" || item_choice == "headphones") {
             cout << "You have chosen: Headphones" << endl;
             cout << "Enter the quantity you want: ";
             int quantity;
             cin >> quantity;
-            //additems("Headphones", quantity);
+            additems("Headphones", quantity, customer);
         }
         else if (item_choice == "list") {
             continue;
@@ -288,7 +289,7 @@ void MelectronicsAisle() {
             break;
         }
         else if (item_choice == "cart") {
-            //displayCart();
+            displayCart(customer);
         }
         else {
             cout << "Invalid choice. Please select a valid item or option." << endl;
@@ -298,7 +299,7 @@ void MelectronicsAisle() {
 }
 
 //JLS: mejier store to select the aisles ill add the other stores based off of this as the base
-void Store(string storeName) {
+void Store(string storeName, shopper customer) {
     cout << "Welcome to " << storeName << "!" << endl;
 
     while (true) {
@@ -312,16 +313,16 @@ void Store(string storeName) {
         cin >> aisle_choice;
 
         if (aisle_choice == "1" || aisle_choice == "grocery") {
-            MgroceryAisle();
+            MgroceryAisle(customer);
         }
         else if (aisle_choice == "2" || aisle_choice == "clothing") {
-            MclothingAisle();
+            MclothingAisle(customer);
         }
         else if (aisle_choice == "3" || aisle_choice == "electronics") {
-            MelectronicsAisle();
+            MelectronicsAisle(customer);
         }
         else if (aisle_choice == "cart") {
-            //displayCart();
+            displayCart(customer);
         }
         else if (aisle_choice == "exit") {
             cout << "Thank you for shopping with us. Goodbye!" << endl;
@@ -350,7 +351,7 @@ int main() {
     //select store that the user has entered
     string storeName = ChooseStore(i);
 
-    Store(storeName);
+    Store(storeName, customer);
 
 }
 void ListStores(shopper customer) {
