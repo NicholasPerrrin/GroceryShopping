@@ -30,8 +30,14 @@ void displayCart(shopper& customer) {
         cout << "Cart is empty" << endl;
     }
     else {
+        cout << "Your cart" << endl;
         for (int i = 0; i < CART_SIZE; i++) {
-            cout << customer.cart[i];
+            if (customer.cart[i] != "") {
+                cout << i + 1 << ": " << customer.cart[i] << endl;
+            }
+            else {
+                continue;
+            }
         }
     }
 }
@@ -96,21 +102,7 @@ void MgroceryAisle(shopper customer) {
             break;
         }
         else if (item_choice == "cart") {
-            //displayCart(customer);
-            if (customer.cart[0] == "") {
-                cout << "Cart is empty" << endl;
-            }
-            else {
-                cout << "Your cart" << endl;
-                for (int i = 0; i < CART_SIZE; i++) {
-                    if (customer.cart[i] != "") {
-                        cout << i+1 << ": " << customer.cart[i] << endl;
-                    }
-                    else {
-                        continue;
-                    }
-                }
-            }
+            displayCart(customer);
         }
         else {
             cout << "Invalid choice. Please select a valid item or option." << endl;
