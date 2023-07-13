@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ shopper Customer(shopper customer);
 
 // JLS: added this to make sure adding items worked but can leave it in to allow users to see cart before checkout
 void displayCart(shopper& customer) {
+    cout << setfill('.');
     if (customer.cart[0] == "") {
         cout << "Cart is empty" << endl;
     }
@@ -33,7 +35,7 @@ void displayCart(shopper& customer) {
         cout << "Your cart" << endl;
         for (int i = 0; i < CART_SIZE; i++) {
             if (customer.cart[i] != "") {
-                cout << i + 1 << ": " << customer.cart[i] << endl;
+                cout << i + 1 << ": " << setw(15) << customer.cart[i] << endl;
             }
             else {
                 continue;
