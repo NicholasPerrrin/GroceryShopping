@@ -34,16 +34,6 @@ void displayCart(shopper& customer) {
             cout << customer.cart[i];
         }
     }
-    /*cout << endl << "Your cart contains:" << endl;
-    if (cart.empty()) {
-        cout << "Cart is empty." << endl;
-    }
-    else {
-        for (const auto& pair : cart) {
-            cout << pair.first << ": " << pair.second << endl;
-        }
-    }
-    cout << endl;*/
 }
 
 // JLS: gave additems funcallity to test isles you can change it if needed tho its basic just to make sure items are added
