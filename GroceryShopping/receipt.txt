@@ -1,0 +1,12 @@
+Receipt
+----------------------
+Milk: $2.99
+Milk: $2.99
+Eggs: $1.99
+Chicken: $5.99
+Chicken: $5.99
+Chicken: $5.99
+Cereal: $3.49
+Cereal: $3.49
+----------------------
+Total: $32.92

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -14,15 +15,20 @@ struct shopper {
     string cart[CART_SIZE];
 };
 
-double MakePurchase();//output the total and ask for confirmation to complete the order
+//double MakePurchase();//output the total and ask for confirmation to complete the order
 void ListStores(shopper customer);//lists the store to choose from
 string ChooseStore(int i);//choose from a list of stores to go to
-void LeaveStore();//allows the user to leave the current store
-void ListItems();//lists the items in the aisle
-void addItems(string item, int quantity, shopper& customer);
-void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
+//void LeaveStore();//allows the user to leave the current store
+//void ListItems();//lists the items in the aisle
+//void addItems(string item, int quantity, shopper& customer);
+//void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
 void displayCart(shopper& customer);
 void Store(string storeName, shopper customer);
+double GetItemPrice(string item);
+void SaveReceipt(shopper customer, double total);
+double CalculateTotal(shopper customer);
+void ReadShoppingList(shopper& customer);
+
 shopper Customer(shopper customer);
 
 // JLS: added this to make sure adding items worked but can leave it in to allow users to see cart before checkout
@@ -48,6 +54,7 @@ void displayCart(shopper& customer) {
 // it dosent have prices yet but will implement them later
 void additems(string item, int quantity, shopper& customer) {
     for (int i = 0; i < quantity; i++) {
+        index;
         customer.cart[index] = item;
         index++;
     }
@@ -324,6 +331,8 @@ void Store(string storeName, shopper customer) {
         }
         else if (aisle_choice == "exit") {
             cout << "Thank you for shopping with us. Goodbye!" << endl;
+            double total = CalculateTotal(customer);
+            SaveReceipt(customer, total);
             break;
         }
         else {
@@ -342,13 +351,16 @@ int main() {
     //initialize customer
     customer = Customer(customer);
 
+    //call ReadShoppingList
+    ReadShoppingList(customer);
+    //call ListStores
     ListStores(customer);
     
     //get input from user to choose store
     cin >> i;
     //select store that the user has entered
     string storeName = ChooseStore(i);
-
+    //call Store
     Store(storeName, customer);
 
 }
@@ -380,4 +392,86 @@ shopper Customer(shopper customer) {
     cin >> customer.firstName >> customer.LastName;
 
     return customer;
+}
+
+//JLS: function to read from file shoppinglist.txt and add the items in the txt file to cart
+void ReadShoppingList(shopper& customer) {
+    ifstream inputFile("shoppinglist.txt");
+    if (inputFile.is_open()) {
+        string item;
+        int quantity;
+        while (inputFile >> item >> quantity) {
+            additems(item, quantity, customer);
+        }
+        inputFile.close();
+        cout << "Items from shoppinglist.txt added to the cart." << endl;
+    }
+    else {
+        cout << "Error opening shoppinglist.txt file!" << endl;
+    }
+}
+
+// Function to save the receipt to a file
+void SaveReceipt(shopper customer, double total) {
+    ofstream receiptFile;
+    receiptFile.open("receipt.txt");
+    if (receiptFile.is_open()) {
+        receiptFile << "Receipt" << endl;
+        receiptFile << "----------------------" << endl;
+        for (int i = 0; i < 100; i++) {
+            if (!customer.cart[i].empty()) {
+                receiptFile << customer.cart[i] << ": $" << fixed << setprecision(2) << GetItemPrice(customer.cart[i]) << endl;
+            }
+        }
+        receiptFile << "----------------------" << endl;
+        receiptFile << "Total: $" << fixed << setprecision(2) << total << endl;
+        receiptFile.close();
+        cout << "Receipt saved to receipt.txt" << endl;
+    }
+    else {
+        cout << "Error saving receipt to file!" << endl;
+    }
+}
+// Function to get the price of an item
+double GetItemPrice(string item) {
+    if (item == "Milk") {
+        return 2.99;
+    }
+    else if (item == "Eggs") {
+        return 1.99;
+    }
+    else if (item == "Chicken") {
+        return 5.99;
+    }
+    else if (item == "Cereal") {
+        return 3.49;
+    }
+    else if (item == "T-Shirt") {
+        return 9.99;
+    }
+    else if (item == "Jeans") {
+        return 19.99;
+    }
+    else if (item == "Jacket") {
+        return 29.99;
+    }
+    else if (item == "Laptop") {
+        return 599.99;
+    }
+    else if (item == "Smartphone") {
+        return 399.99;
+    }
+    else if (item == "Headphones") {
+        return 49.99;
+    }
+    return 0.0;
+}
+// Function to calculate the total cost of the items in the cart
+// JLS:added nested loop to meet projects requirements
+double CalculateTotal(shopper customer) {
+    double total = 0.0;
+    for (int i = 0; i < CART_SIZE; i++) {
+                total += GetItemPrice(customer.cart[i]);
+    }
+    return total;
 }

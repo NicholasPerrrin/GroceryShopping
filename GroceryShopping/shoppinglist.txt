@@ -1,0 +1,4 @@
+Milk 2
+Eggs 1
+Chicken 3
+Cereal 2
