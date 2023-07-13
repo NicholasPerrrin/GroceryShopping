@@ -18,7 +18,7 @@ void ListStores(shopper customer);//lists the store to choose from
 string ChooseStore(int i);//choose from a list of stores to go to
 void LeaveStore();//allows the user to leave the current store
 void ListItems();//lists the items in the aisle
-void addItems(string item, int quantity, shopper customer);
+void addItems(string item, int quantity, shopper& customer);
 void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
 void displayCart(shopper& customer);
 void Store(string storeName, shopper customer);
