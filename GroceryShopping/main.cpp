@@ -101,10 +101,10 @@ void MgroceryAisle(shopper customer) {
                 cout << "Cart is empty" << endl;
             }
             else {
-                cout << "Your cart";
+                cout << "Your cart" << endl;
                 for (int i = 0; i < CART_SIZE; i++) {
                     if (customer.cart[i] != "") {
-                        cout << customer.cart[i] << endl;
+                        cout << i+1 << ": " << customer.cart[i] << endl;
                     }
                     else {
                         continue;
