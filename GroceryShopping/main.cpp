@@ -343,30 +343,6 @@ void Store(string storeName, shopper& customer) {
     }
 }
 
-int main() {
-    //variables
-    int i;//this integer will represent which store the user is in
-
-    //shopper structure
-    shopper customer;
-
-    //initialize customer
-    customer = Customer(customer);
-
-    //call ReadShoppingList
-    ReadShoppingList(customer);
-    //call ListStores
-    ListStores(customer);
-    
-    //get input from user to choose store
-    cin >> i;
-    //select store that the user has entered
-    string storeName = ChooseStore(i);
-    //call Store
-    Store(storeName, customer);
-
-}
-
 //this function list the stores for the user to go to
 void ListStores(shopper customer) {
     cout << "Hello, " << customer.firstName << " " << customer.LastName << endl << endl;
@@ -481,4 +457,28 @@ double CalculateTotal(shopper customer) {
                 total += GetItemPrice(customer.cart[i]);
     }
     return total;
+}
+
+int main() {
+    //variables
+    int i;//this integer will represent which store the user is in
+
+    //shopper structure
+    shopper customer;
+
+    //initialize customer
+    customer = Customer(customer);
+
+    //call ReadShoppingList
+    ReadShoppingList(customer);
+    //call ListStores
+    ListStores(customer);
+
+    //get input from user to choose store
+    cin >> i;
+    //select store that the user has entered
+    string storeName = ChooseStore(i);
+    //call Store
+    Store(storeName, customer);
+
 }
