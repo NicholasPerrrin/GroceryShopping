@@ -15,15 +15,10 @@ struct shopper {
     string cart[CART_SIZE];
 };
 
-//double MakePurchase();//output the total and ask for confirmation to complete the order
 void ListStores(shopper customer);//lists the store to choose from
 string ChooseStore(int i);//choose from a list of stores to go to
-//void LeaveStore();//allows the user to leave the current store
-//void ListItems();//lists the items in the aisle
-//void addItems(string item, int quantity, shopper& customer);
-//void PrintReceipt();//outputs the total cost and items purchased upon leaving a store
 void displayCart(shopper& customer);
-void Store(string storeName, shopper customer);
+void Store(string storeName, shopper& customer);
 double GetItemPrice(string item);
 void SaveReceipt(shopper customer, double total);
 double CalculateTotal(shopper customer);
@@ -61,8 +56,9 @@ void additems(string item, int quantity, shopper& customer) {
 }
 
 //JLS: aisles for Meijer all labeled with M
-void MgroceryAisle(shopper customer) {
-    cout << "You are in the Grocery aisle." << endl;
+void MgroceryAisle(shopper& customer) {
+    int quantity;
+    cout << endl << "You are in the Grocery aisle." << endl;
 
     while (true) {
         cout << "Items available in Grocery:" << endl;
@@ -78,29 +74,29 @@ void MgroceryAisle(shopper customer) {
         if (item_choice == "1" || item_choice == "milk") {
             cout << "You have chosen: Milk" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Milk", quantity, customer);
         }
         else if (item_choice == "2" || item_choice == "eggs") {
             cout << "You have chosen: Eggs" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Eggs", quantity, customer);
         }
         else if (item_choice == "3" || item_choice == "chicken") {
             cout << "You have chosen: Chicken" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Chicken", quantity, customer);
         }
         else if (item_choice == "4" || item_choice == "cereal") {
             cout << "You have chosen: Cereal" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Cereal", quantity, customer);
         }
         else if (item_choice == "list") {
@@ -121,8 +117,9 @@ void MgroceryAisle(shopper customer) {
 }
 
 //JLS: clothing aisle has a nested loop to select women or men clothing to meet project requirments
-void MclothingAisle(shopper customer) {
-    cout << "You are in the Clothing aisle." << endl;
+void MclothingAisle(shopper& customer) {
+    int quantity;
+    cout << endl << "You are in the Clothing aisle." << endl;
 
     while (true) {
         cout << "Please select a clothing section:" << endl;
@@ -150,22 +147,22 @@ void MclothingAisle(shopper customer) {
                 if (item_choice == "1" || item_choice == "t-shirt") {
                     cout << "You have chosen: Men's T-Shirt" << endl;
                     cout << "Enter the quantity you want: ";
-                    int quantity;
                     cin >> quantity;
+                    cout << endl;
                     additems("Men's T-Shirt", quantity, customer);
                 }
                 else if (item_choice == "2" || item_choice == "jeans") {
                     cout << "You have chosen: Men's Jeans" << endl;
                     cout << "Enter the quantity you want: ";
-                    int quantity;
                     cin >> quantity;
+                    cout << endl;
                     additems("Men's Jeans", quantity, customer);
                 }
                 else if (item_choice == "3" || item_choice == "jacket") {
                     cout << "You have chosen: Men's Jacket" << endl;
                     cout << "Enter the quantity you want: ";
-                    int quantity;
                     cin >> quantity;
+                    cout << endl;
                     additems("Men's Jacket", quantity, customer);
                 }
                 else if (item_choice == "list") {
@@ -252,8 +249,9 @@ void MclothingAisle(shopper customer) {
     cout << endl;
 }
 
-void MelectronicsAisle(shopper customer) {
-    cout << "You are in the Electronics aisle." << endl;
+void MelectronicsAisle(shopper& customer) {
+    int quantity;
+    cout << endl << "You are in the Electronics aisle." << endl;
 
     while (true) {
         cout << "Items available in Electronics:" << endl;
@@ -268,22 +266,22 @@ void MelectronicsAisle(shopper customer) {
         if (item_choice == "1" || item_choice == "laptop") {
             cout << "You have chosen: Laptop" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Laptop", quantity, customer);
         }
         else if (item_choice == "2" || item_choice == "smartphone") {
             cout << "You have chosen: Smartphone" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Smartphone", quantity, customer);
         }
         else if (item_choice == "3" || item_choice == "headphones") {
             cout << "You have chosen: Headphones" << endl;
             cout << "Enter the quantity you want: ";
-            int quantity;
             cin >> quantity;
+            cout << endl;
             additems("Headphones", quantity, customer);
         }
         else if (item_choice == "list") {
@@ -304,8 +302,8 @@ void MelectronicsAisle(shopper customer) {
 }
 
 //JLS: mejier store to select the aisles ill add the other stores based off of this as the base
-void Store(string storeName, shopper customer) {
-    cout << "Welcome to " << storeName << "!" << endl;
+void Store(string storeName, shopper& customer) {
+    cout << endl << "Welcome to " << storeName << "!" << endl;
 
     while (true) {
         cout << "Please select an aisle:" << endl;
@@ -330,7 +328,7 @@ void Store(string storeName, shopper customer) {
             displayCart(customer);
         }
         else if (aisle_choice == "exit") {
-            cout << "Thank you for shopping with us. Goodbye!" << endl;
+            cout << endl << "Thank you for shopping with us. Goodbye!" << endl;
             double total = CalculateTotal(customer);
             SaveReceipt(customer, total);
             break;
@@ -365,7 +363,7 @@ int main() {
 
 }
 void ListStores(shopper customer) {
-    cout << "Hello, " << customer.firstName << " " << customer.LastName << endl;
+    cout << "Hello, " << customer.firstName << " " << customer.LastName << endl << endl;
     cout << "Available stores to choose from: " << endl;
     cout << "Meijer (press 1)" << endl;
     cout << "Wallmart (press 2)" << endl;
@@ -404,7 +402,7 @@ void ReadShoppingList(shopper& customer) {
             additems(item, quantity, customer);
         }
         inputFile.close();
-        cout << "Items from shoppinglist.txt added to the cart." << endl;
+        cout << endl << "Items from shoppinglist.txt added to the cart." << endl << endl;
     }
     else {
         cout << "Error opening shoppinglist.txt file!" << endl;
