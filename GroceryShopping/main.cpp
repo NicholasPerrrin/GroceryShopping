@@ -26,7 +26,7 @@ void ReadShoppingList(shopper& customer);
 
 shopper Customer(shopper customer);
 
-// JLS: added this to make sure adding items worked but can leave it in to allow users to see cart before checkout
+//this function allows user to see the contents of their cart before checkout
 void displayCart(shopper& customer) {
     cout << setfill('.');
     if (customer.cart[0] == "") {
@@ -45,8 +45,7 @@ void displayCart(shopper& customer) {
     }
 }
 
-// JLS: gave additems funcallity to test isles you can change it if needed tho its basic just to make sure items are added
-// it dosent have prices yet but will implement them later
+//this method add items to the customer's cart
 void additems(string item, int quantity, shopper& customer) {
     for (int i = 0; i < quantity; i++) {
         index;
@@ -55,8 +54,8 @@ void additems(string item, int quantity, shopper& customer) {
     }
 }
 
-//JLS: aisles for Meijer all labeled with M
-void MgroceryAisle(shopper& customer) {
+//grocery aisle for the store
+void GroceryAisle(shopper& customer) {
     int quantity;
     cout << endl << "You are in the Grocery aisle." << endl;
 
@@ -116,8 +115,8 @@ void MgroceryAisle(shopper& customer) {
     cout << endl;
 }
 
-//JLS: clothing aisle has a nested loop to select women or men clothing to meet project requirments
-void MclothingAisle(shopper& customer) {
+//clothing aisle has a nested loop to select women or men clothing to meet project requirments
+void ClothingAisle(shopper& customer) {
     int quantity;
     cout << endl << "You are in the Clothing aisle." << endl;
 
@@ -249,7 +248,8 @@ void MclothingAisle(shopper& customer) {
     cout << endl;
 }
 
-void MelectronicsAisle(shopper& customer) {
+//electronics aisle for the store
+void ElectronicsAisle(shopper& customer) {
     int quantity;
     cout << endl << "You are in the Electronics aisle." << endl;
 
@@ -301,7 +301,7 @@ void MelectronicsAisle(shopper& customer) {
     cout << endl;
 }
 
-//JLS: mejier store to select the aisles ill add the other stores based off of this as the base
+//store function which allows the user to select which aisle to walk through
 void Store(string storeName, shopper& customer) {
     cout << endl << "Welcome to " << storeName << "!" << endl;
 
@@ -316,13 +316,13 @@ void Store(string storeName, shopper& customer) {
         cin >> aisle_choice;
 
         if (aisle_choice == "1" || aisle_choice == "grocery") {
-            MgroceryAisle(customer);
+            GroceryAisle(customer);
         }
         else if (aisle_choice == "2" || aisle_choice == "clothing") {
-            MclothingAisle(customer);
+            ClothingAisle(customer);
         }
         else if (aisle_choice == "3" || aisle_choice == "electronics") {
-            MelectronicsAisle(customer);
+            ElectronicsAisle(customer);
         }
         else if (aisle_choice == "cart") {
             displayCart(customer);
@@ -371,6 +371,7 @@ void ListStores(shopper customer) {
     cout << "Type any Store to enter: ";
 }
 
+//this funstion allows the user to choose which store to enter
 string ChooseStore(int i) {
     switch (i) {
     case 1:
@@ -385,6 +386,7 @@ string ChooseStore(int i) {
     return storeName;
 }
 
+//this function initializes the customer's first name and last name
 shopper Customer(shopper customer) {
     cout << "Please enter your name: ";
     cin >> customer.firstName >> customer.LastName;
@@ -392,7 +394,7 @@ shopper Customer(shopper customer) {
     return customer;
 }
 
-//JLS: function to read from file shoppinglist.txt and add the items in the txt file to cart
+//function to read from file shoppinglist.txt and add the items in the txt file to cart
 void ReadShoppingList(shopper& customer) {
     ifstream inputFile("shoppinglist.txt");
     if (inputFile.is_open()) {
@@ -409,7 +411,7 @@ void ReadShoppingList(shopper& customer) {
     }
 }
 
-// Function to save the receipt to a file
+//function to save the receipt to a file titled receipt.txt
 void SaveReceipt(shopper customer, double total) {
     ofstream receiptFile;
     receiptFile.open("receipt.txt");
@@ -430,7 +432,8 @@ void SaveReceipt(shopper customer, double total) {
         cout << "Error saving receipt to file!" << endl;
     }
 }
-// Function to get the price of an item
+
+// Function to get the price of an item (used in calculating the total
 double GetItemPrice(string item) {
     if (item == "Milk") {
         return 2.99;
@@ -464,8 +467,8 @@ double GetItemPrice(string item) {
     }
     return 0.0;
 }
+
 // Function to calculate the total cost of the items in the cart
-// JLS:added nested loop to meet projects requirements
 double CalculateTotal(shopper customer) {
     double total = 0.0;
     for (int i = 0; i < CART_SIZE; i++) {
