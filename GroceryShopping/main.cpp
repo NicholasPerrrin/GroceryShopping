@@ -8,23 +8,26 @@ using namespace std;
 string storeName;
 int index = 0;
 const int CART_SIZE = 100;
-
+//structure
 struct shopper {
     string firstName;
     string LastName;
     string cart[CART_SIZE];
 };
-
-void ListStores(shopper customer);//lists the store to choose from
-string ChooseStore(int i);//choose from a list of stores to go to
+//prototypes
 void displayCart(shopper& customer);
+void additems(string item, int quantity, shopper& customer);
+void GroceryAisle(shopper& customer);
+void ClothingAisle(shopper& customer);
+void ElectronicsAisle(shopper& customer);
 void Store(string storeName, shopper& customer);
-double GetItemPrice(string item);
-void SaveReceipt(shopper customer, double total);
-double CalculateTotal(shopper customer);
-void ReadShoppingList(shopper& customer);
-
+void ListStores(shopper customer);
+string ChooseStore(int i);
 shopper Customer(shopper customer);
+void ReadShoppingList(shopper& customer);
+void SaveReceipt(shopper customer, double total);
+double GetItemPrice(string item);
+double CalculateTotal(shopper customer);
 
 //this function allows user to see the contents of their cart before checkout
 void displayCart(shopper& customer) {
@@ -33,15 +36,16 @@ void displayCart(shopper& customer) {
         cout << "Cart is empty" << endl;
     }
     else {
-        cout << "Your cart" << endl;
+        cout << endl << "Your cart" << endl;
         for (int i = 0; i < CART_SIZE; i++) {
             if (customer.cart[i] != "") {
-                cout << i + 1 << ": " << setw(15) << customer.cart[i] << endl;
+                cout << i + 1 << ": " << setw(25) << customer.cart[i] << endl;
             }
             else {
                 continue;
             }
         }
+        cout << endl;
     }
 }
 
@@ -197,22 +201,22 @@ void ClothingAisle(shopper& customer) {
                 if (item_choice == "1" || item_choice == "t-shirt") {
                     cout << "You have chosen: Women's T-Shirt" << endl;
                     cout << "Enter the quantity you want: ";
-                    int quantity;
                     cin >> quantity;
+                    cout << endl;
                     additems("Women's T-Shirt", quantity, customer);
                 }
                 else if (item_choice == "2" || item_choice == "jeans") {
                     cout << "You have chosen: Women's Jeans" << endl;
                     cout << "Enter the quantity you want: ";
-                    int quantity;
                     cin >> quantity;
+                    cout << endl;
                     additems("Women's Jeans", quantity, customer);
                 }
                 else if (item_choice == "3" || item_choice == "jacket") {
                     cout << "You have chosen: Women's Jacket" << endl;
                     cout << "Enter the quantity you want: ";
-                    int quantity;
                     cin >> quantity;
+                    cout << endl;
                     additems("Women's Jacket", quantity, customer);
                 }
                 else if (item_choice == "list") {
@@ -362,6 +366,8 @@ int main() {
     Store(storeName, customer);
 
 }
+
+//this function list the stores for the user to go to
 void ListStores(shopper customer) {
     cout << "Hello, " << customer.firstName << " " << customer.LastName << endl << endl;
     cout << "Available stores to choose from: " << endl;
